@@ -1,0 +1,11 @@
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\bin\Debug\ArduinoController.exe.config
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\obj\Debug\ArduinoController.vbprojResolveAssemblyReference.cache
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\obj\Debug\ArduinoController.Form1.resources
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\obj\Debug\ArduinoController.Resources.resources
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\obj\Debug\ArduinoController.vbproj.GenerateResource.Cache
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\bin\Debug\ArduinoController.exe
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\bin\Debug\ArduinoController.pdb
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\bin\Debug\ArduinoController.xml
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\obj\Debug\ArduinoController.exe
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\obj\Debug\ArduinoController.xml
+c:\users\izayoi\documents\visual studio 2015\Projects\ArduinoController\ArduinoController\obj\Debug\ArduinoController.pdb
