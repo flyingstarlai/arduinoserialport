@@ -71,6 +71,8 @@ Public Class Form1
 
     End Sub
 
+
+
     Private Sub connecting_Timer_Tick(sender As Object, e As EventArgs) Handles connecting_Timer.Tick
         connecting_Timer.Enabled = False
         count = count + 1
@@ -92,6 +94,10 @@ Public Class Form1
             End If
 
 
+
+
+
+
         Else
             'time out (8 * 250 = 2 seconds)
             RichTextBox1.Text &= vbCrLf & "ERROR" & vbCrLf & "Can not connect" & vbCrLf
@@ -110,6 +116,14 @@ Public Class Form1
         receivedData = ReceiveSerialData()
         RichTextBox1.AppendText(receivedData)
 
+        Dim IRValue As String
+        IRValue = Microsoft.VisualBasic.Left(receivedData, 3)  'IR0 or IR1
+        If (IRValue.Length = 3) Then
+            If (String.Compare(IRValue.Substring(0, 2), "IR") = 0) Then
+                IR_label.Text = IRValue.Substring(2, 1)
+
+            End If
+        End If
 
     End Sub
 
@@ -132,12 +146,12 @@ Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If (connected) Then
-            If (Button1.Text = "TURN ON") Then
-                SerialPort1.WriteLine("<LEDON>")
-                Button1.Text = "TURN OFF"
+            If (Button1.Text = "OPEN GATE") Then
+                SerialPort1.WriteLine("<OPENGATE>")
+                Button1.Text = "CLOSE GATE"
             Else
-                SerialPort1.WriteLine("<LEDOFF>")
-                Button1.Text = "TURN ON"
+                SerialPort1.WriteLine("<CLOSEGATE>")
+                Button1.Text = "OPEN GATE"
             End If
         Else
             MsgBox("Not connected")

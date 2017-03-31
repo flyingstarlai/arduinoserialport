@@ -35,6 +35,8 @@ Partial Class Form1
         Me.Timer_LBL = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.IR_label = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'refreshCOM_CB_BTN
@@ -98,7 +100,6 @@ Partial Class Form1
         '
         'Timer1
         '
-        Me.Timer1.Interval = 500
         '
         'connecting_Timer
         '
@@ -116,12 +117,13 @@ Partial Class Form1
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Location = New System.Drawing.Point(350, 115)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.Size = New System.Drawing.Size(81, 37)
         Me.Button1.TabIndex = 27
-        Me.Button1.Text = "TURN ON"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Text = "OPEN GATE"
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Button2
         '
@@ -132,11 +134,33 @@ Partial Class Form1
         Me.Button2.Text = "CLEAR"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(447, 45)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(94, 18)
+        Me.Label1.TabIndex = 29
+        Me.Label1.Text = "IR SENSOR:"
+        '
+        'IR_label
+        '
+        Me.IR_label.AutoSize = True
+        Me.IR_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.IR_label.Location = New System.Drawing.Point(547, 46)
+        Me.IR_label.Name = "IR_label"
+        Me.IR_label.Size = New System.Drawing.Size(16, 18)
+        Me.IR_label.TabIndex = 30
+        Me.IR_label.Text = "1"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(601, 363)
+        Me.ClientSize = New System.Drawing.Size(659, 363)
+        Me.Controls.Add(Me.IR_label)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Timer_LBL)
@@ -165,4 +189,6 @@ Partial Class Form1
     Friend WithEvents Timer_LBL As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents IR_label As Label
 End Class

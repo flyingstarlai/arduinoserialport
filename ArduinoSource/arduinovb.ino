@@ -1,36 +1,52 @@
 
-enum TASKS {
+enum TASKS_FEEDBACK {
   PING,
-  TURN_LED_ON,
-  TURN_LED_OFF,
   OPEN_GATE,
-  CLOSE_GATE,  
+  CLOSE_GATE, 
 };
 
 
-boolean debug = true;
+//IR Consts:
+const int irReceiver = 2;                // 紅外線接收器
+const int irLed  = 3;                    // 紅外線發射器
+const unsigned int frequency = 38000;    // 發射頻率(單位: Hz)
 
+
+boolean debug = true;
 const byte numChars = 10;
 char receivedChars[numChars];
-
 boolean newData = false;
+boolean readSensor = false;
 
 
 void setup() 
 {
 
-     pinMode(8, OUTPUT); 
-
-     Serial.begin(9600);
-     sendStartMessage();
+    pinMode(8, OUTPUT); //LED
+    pinMode(irReceiver, INPUT);           // 把 irReceiver 接腳設置為 INPUT
+    pinMode(irLed, OUTPUT);               // 把 irLed 接腳設置為 INPUT
+    Serial.begin(9600);
+    sendStartMessage();
 }
 
 void loop() 
 {
-     if (Serial.available() > 0)     {  recvWithStartEndMarkers(); }
-     if (newData) { parseData(); }
+   if (Serial.available() > 0) { recvWithStartEndMarkers(); }
+   if (newData) { parseData(); }
+   if(readSensor){  readIRSensor();}
 }     
 
+void readIRSensor() {
+  tone(irLed, frequency); 
+  delay(5);     
+  int ir_status = digitalRead(irReceiver);   // 讀取 irReceiver 的狀態
+  if (ir_status == 0) {
+     Serial.println("IR0");
+     noTone(irLed);  
+  } else
+    Serial.println("IR1");      
+  delay(5);  
+}
 
 void sendStartMessage()
 {
@@ -67,7 +83,7 @@ void parseData()
             delay(100);
             digitalWrite(8, LOW); 
             
-            sendFeedBack(PING);
+            if(debug) sendFeedback(PING);
         }
 
         if (strcmp(receivedChars, "START")  == 0)
@@ -75,18 +91,21 @@ void parseData()
             sendStartMessage();
         }  
 
-        if (strcmp(receivedChars, "LEDON")  == 0)
+        if (strcmp(receivedChars, "OPENGATE")  == 0)
         {
-          digitalWrite(8,HIGH); 
-          sendFeedBack(TURN_LED_ON);
-        }
+          readSensor = true;
+            if(debug) sendFeedback(OPEN_GATE);
+            digitalWrite(8,HIGH); 
+        } 
 
-        if (strcmp(receivedChars, "LEDOFF")  == 0)
+        if (strcmp(receivedChars, "CLOSEGATE")  == 0)
         {
-          digitalWrite(8,LOW); 
-         sendFeedBack(TURN_LED_OFF);
+          readSensor = false;
+            if(debug) sendFeedback(CLOSE_GATE);
+            digitalWrite(8,LOW);
+        } 
 
-        }
+     
         
 }
 
@@ -134,19 +153,18 @@ void recvWithStartEndMarkers()
 
 
 
-void sendFeedBack(int task)
+void sendFeedback(int task)
 {
   switch(task) {
      case PING:
        Serial.println(" ");Serial.print("Feedback from: "); Serial.println("PING");
        break;
-    case TURN_LED_ON:
-       Serial.println(" ");Serial.print("Feedback from: "); Serial.println("TURN LED ON");
-       break;
-    case TURN_LED_OFF:
-       Serial.println(" ");Serial.print("Feedback from: "); Serial.println("TURN LED OFF");
-       break;
-       
+    case OPEN_GATE:
+      Serial.println(" ");Serial.print("Feedback from: "); Serial.println("OPEN GATE");
+      break;
+    case CLOSE_GATE:
+      Serial.println(" ");Serial.print("Feedback from: "); Serial.println("CLOSE GATE");
+      break;  
   }
  
 }
